@@ -14,7 +14,6 @@ import {
   Leaf, 
   Gavel, 
   BarChart, 
-  Settings, 
   Dices, 
   Shield, 
   Zap, 
@@ -26,6 +25,8 @@ import {
   ShoppingBag, 
   Car, 
   Home, 
+  X,
+  History as HistoryIcon,
   LucideIcon 
 } from "lucide-react";
 import { generateBrandingChallenge, BrandingChallenge } from "./services/geminiService";
@@ -118,6 +119,8 @@ export default function App() {
     icon: "FlaskConical",
   });
   const [isSpinning, setIsSpinning] = useState(false);
+  const [history, setHistory] = useState<BrandingChallenge[]>([]);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   const handleSpin = useCallback(async () => {
     if (isSpinning) return;
@@ -133,6 +136,7 @@ export default function App() {
     const [result] = await Promise.all([generationPromise, minWait]);
     
     setChallenge(result);
+    setHistory(prev => [result, ...prev]);
     setIsSpinning(false);
   }, [isSpinning]);
 
@@ -143,19 +147,25 @@ export default function App() {
       {/* Header */}
       <header className="flex items-center justify-between w-full px-6 py-4 sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <div className="bg-blue-600 p-1.5 rounded-lg">
-            <Shield className="text-white w-6 h-6" />
-          </div>
-          <span className="text-2xl tracking-tighter font-bold text-gray-900 font-headline">BrandGen</span>
+          <img src="/logo.png" alt="Reting Logo" className="h-10 w-auto" referrerPolicy="no-referrer" />
         </div>
         <div className="hidden md:flex gap-8 items-center">
-          <a className="text-blue-600 font-semibold hover:bg-gray-100 transition-colors px-3 py-1 rounded-lg" href="#">Challenge</a>
-          <a className="text-gray-500 hover:bg-gray-100 transition-colors px-3 py-1 rounded-lg" href="#">History</a>
-          <a className="text-gray-500 hover:bg-gray-100 transition-colors px-3 py-1 rounded-lg" href="#">Profile</a>
+          <button 
+            onClick={() => {
+              setIsHistoryOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="text-blue-600 font-semibold hover:bg-gray-100 transition-colors px-3 py-1 rounded-lg"
+          >
+            Challenge
+          </button>
+          <button 
+            onClick={() => setIsHistoryOpen(true)}
+            className="text-gray-500 hover:bg-gray-100 transition-colors px-3 py-1 rounded-lg"
+          >
+            History
+          </button>
         </div>
-        <button className="text-gray-500 hover:bg-gray-100 transition-colors p-2 rounded-full">
-          <Settings className="w-6 h-6" />
-        </button>
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-12 md:py-20">
@@ -235,11 +245,70 @@ export default function App() {
         </div>
       </main>
 
+      {/* History Slide-over */}
+      <AnimatePresence>
+        {isHistoryOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsHistoryOpen(false)}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[60]"
+            />
+            {/* Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-[70] flex flex-col"
+            >
+              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+                <h2 className="text-xl font-bold font-headline">Historial de Retos</h2>
+                <button 
+                  onClick={() => setIsHistoryOpen(false)} 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {history.length === 0 ? (
+                  <div className="text-center py-12 text-gray-400">
+                    <HistoryIcon className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                    <p>Aún no has generado ningún reto.</p>
+                  </div>
+                ) : (
+                  history.map((item, index) => (
+                    <motion.div 
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-200 transition-colors group"
+                    >
+                      <div className="font-bold text-lg text-blue-600 group-hover:text-blue-700 transition-colors">
+                        {item.name}
+                      </div>
+                      <div className="text-sm text-gray-500 leading-relaxed">
+                        ({item.sector} — {item.category})
+                      </div>
+                    </motion.div>
+                  ))
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
       <footer className="mt-20 py-12 bg-gray-200 text-gray-500 text-center">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-2xl font-bold text-gray-900 mb-2 font-headline">BrandGen</div>
-          <p className="text-sm">© 2024 Generador de Desafíos de Branding. Herramienta para profesionales.</p>
+          <img src="/logo.png" alt="Reting Logo" className="h-8 w-auto mx-auto mb-2" referrerPolicy="no-referrer" />
+          <p className="text-sm">© 2024 Reting - Generador de Desafíos de Branding. Herramienta para profesionales.</p>
         </div>
       </footer>
     </div>

@@ -1,5 +1,5 @@
 {
-  "name": "BrandGen - Generador de Desafíos de Branding",
+  "name": "Reting - Generador de Desafíos de Branding",
   "description": "Generador de retos de branding con lógica inteligente usando la API de Gemini.",
   "requestFramePermissions": []
 }
