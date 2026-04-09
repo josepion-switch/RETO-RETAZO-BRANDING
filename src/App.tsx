@@ -96,7 +96,7 @@ function Reel({ value, isSpinning, fallbackList, label, icon: Icon, colorClass =
   return (
     <div className={`bg-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between border-l-4 ${colorClass} overflow-hidden relative`}>
       <div className="mb-2 md:mb-0 relative z-10">
-        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">{label}</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] font-normal font-headline text-gray-400">{label}</span>
         <AnimatePresence mode="wait">
           <motion.div
             key={displayValue}
@@ -104,7 +104,7 @@ function Reel({ value, isSpinning, fallbackList, label, icon: Icon, colorClass =
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: isSpinning ? -20 : 0, opacity: 0 }}
             transition={{ duration: isSpinning ? 0.1 : 0.5, ease: "easeOut" }}
-            className="text-2xl font-bold text-gray-900 mt-1"
+            className="text-2xl font-bold font-headline text-gray-900 mt-1"
           >
             {displayValue}
           </motion.div>
@@ -186,7 +186,7 @@ export default function App() {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tighter mb-4 font-headline"
+            className="text-5xl md:text-7xl font-bold text-gray-900 tracking-tighter mb-4 font-headline"
           >
             Reto <span className="text-blue-600">Retazo</span> de Branding
           </motion.h1>
@@ -194,7 +194,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-gray-500 text-xl max-w-2xl leading-relaxed"
+            className="text-gray-500 text-xl max-w-2xl leading-relaxed font-medium font-headline"
           >
             Supera el bloqueo creativo practicando con este reto haciendo marcas aleatorias.
           </motion.p>
@@ -227,7 +227,7 @@ export default function App() {
               {/* Name Reel */}
               <div className="bg-blue-50 p-8 rounded-2xl shadow-xl flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[160px]">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 to-transparent"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-blue-600 mb-4 relative z-10">Nombre Sugerido</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] font-normal font-headline text-blue-600 mb-4 relative z-10">Nombre Sugerido</span>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -236,7 +236,7 @@ export default function App() {
                     animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
                     exit={{ scale: 1.2, opacity: 0, filter: "blur(10px)" }}
                     transition={{ duration: isSpinning ? 0.2 : 0.6, ease: "easeOut" }}
-                    className="text-6xl md:text-7xl font-black text-blue-600 tracking-tighter relative z-10 font-headline"
+                    className="text-6xl md:text-7xl font-bold text-blue-600 tracking-tighter relative z-10 font-headline"
                   >
                     {isSpinning ? "" : challenge.name}
                   </motion.div>
@@ -247,7 +247,7 @@ export default function App() {
               <button 
                 onClick={handleSpin}
                 disabled={isSpinning}
-                className={`w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white py-6 rounded-xl font-bold text-xl flex items-center justify-center gap-4 transition-all shadow-lg active:scale-[0.98] ${isSpinning ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
+                className={`w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white py-6 rounded-xl font-bold font-headline text-xl flex items-center justify-center gap-4 transition-all shadow-lg active:scale-[0.98] ${isSpinning ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
               >
                 <Dices className={`w-8 h-8 ${isSpinning ? 'animate-spin' : ''}`} />
                 <span>{isSpinning ? "Girando..." : "¡Girar Tómbola!"}</span>
