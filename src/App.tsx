@@ -147,7 +147,7 @@ export default function App() {
       {/* Header */}
       <header className="flex items-center justify-between w-full px-6 py-4 sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Reting Logo" className="h-10 w-auto" referrerPolicy="no-referrer" />
+          <img src="logo.png" alt="Reting Logo" className="h-10 w-auto" referrerPolicy="no-referrer" />
         </div>
         <div className="hidden md:flex gap-8 items-center">
           <button 
@@ -307,7 +307,7 @@ export default function App() {
       {/* Footer */}
       <footer className="mt-20 py-12 bg-gray-200 text-gray-500 text-center">
         <div className="max-w-7xl mx-auto px-6">
-          <img src="/logo.png" alt="Reting Logo" className="h-8 w-auto mx-auto mb-2" referrerPolicy="no-referrer" />
+          <img src="logo.png" alt="Reting Logo" className="h-8 w-auto mx-auto mb-2" referrerPolicy="no-referrer" />
           <p className="text-sm">© 2024 Reting - Generador de Desafíos de Branding. Herramienta para profesionales.</p>
         </div>
       </footer>
