@@ -53,9 +53,21 @@ const iconMap: Record<string, LucideIcon> = {
   Home,
 };
 
-const fallbackSectors = ["Startup Tecnológica", "Cooperativa Artesanal", "Conglomerado de Lujo", "Laboratorio de Innovación", "Estudio de Diseño", "ONG Ambiental", "Firma de Abogados", "Consultora Digital"];
-const fallbackCategories = ["Seguridad Informática", "EdTech", "Panadería Vegana", "Bienestar", "Finanzas Éticas", "Moda Sostenible", "Viajes de Aventura", "Mascotas"];
-const fallbackNames = ["BioTrend", "Edulab", "FerreMax", "Segurify", "EcoNest", "TechGuard", "PurePath", "OmniHub"];
+const fallbackSectors = [
+  "Startup Tecnológica", "Cooperativa Artesanal", "Conglomerado de Lujo", "Laboratorio de Innovación", 
+  "Estudio de Diseño", "ONG Ambiental", "Firma de Abogados", "Consultora Digital", "Agencia de Viajes", 
+  "Restaurante Gourmet", "Tienda de Ropa", "App de Fitness", "Plataforma de Música", "Estudio Fotográfico", 
+  "Empresa de Logística", "Inmobiliaria", "Fintech", "EdTech", "HealthTech", "AgroTech"
+];
+const fallbackCategories = [
+  "Seguridad Informática", "EdTech", "Panadería Vegana", "Bienestar", "Finanzas Éticas", "Moda Sostenible", 
+  "Viajes de Aventura", "Mascotas", "Branding Minimalista", "Transformación Cloud", "Ecoturismo", 
+  "Cocina Molecular", "Moda Circular", "Yoga en Casa", "Streaming Indie", "Retrato Artístico"
+];
+const fallbackNames = [
+  "BioTrend", "Edulab", "FerreMax", "Segurify", "EcoNest", "TechGuard", "PurePath", "OmniHub", 
+  "CloudNexa", "EcoRutas", "MolecuLab", "ReVestir", "ZenFlow", "IndieWave", "FotoLuz", "Dronify"
+];
 
 interface ReelProps {
   value: string;
